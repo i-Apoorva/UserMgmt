@@ -2,14 +2,15 @@
 User = require('../models/userModel');
 // Handle index actions
 exports.index = function (req, res) {
-    User.get(function (err, users) {
+    User.find(function (err, users) {
         if (err) {
             res.json({
                 status: "error",
                 message: err,
             });
         }
-        res.render('index', { title: 'usermgmt', users: users });
+        res.json(users);
+        //res.render( });
     });
 };
 // Handle create user actions
@@ -20,9 +21,9 @@ exports.new = function (req, res) {
     user.email = req.body.email;
     user.phone = req.body.phone;
 // save the user and check for errors
-    user.save(function (err) {
-        // if (err)
-        //     res.json(err);
+    user.save(function (err, user) {
+        if (err)
+            res.json(err);
 res.json({
             message: 'New user created!',
             data: user
@@ -50,7 +51,7 @@ user.name = req.body.name ? req.body.name : user.name;
         user.email = req.body.email;
         user.phone = req.body.phone;
 // save the user and check for errors
-        user.save(function (err) {
+        user.save(function (err,user) {
             if (err)
                 res.json(err);
             res.json({
