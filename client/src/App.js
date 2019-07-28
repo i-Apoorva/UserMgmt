@@ -5,9 +5,6 @@ import CreateUser from "./components/create-user.component";
 import EditUser from "./components/edit-user.component";
 import UsersList from "./components/users-list.component";
 import DeleteUser from "./components/delete-user.component";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css';
-
 
 class App extends Component {
   // initialize our state

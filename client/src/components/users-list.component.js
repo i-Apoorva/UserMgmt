@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Button} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Popup from "reactjs-popup";
-
 import axios from 'axios';
+import DeleteUser from './delete-user.component';
+import EditUser from './edit-user.component';
 
 const Users = props => (
     <tr>
@@ -14,7 +13,7 @@ const Users = props => (
         <td>{props.user.gender}</td>
         <td>{props.user.phone}</td>
         <td>
-        <Popup trigger={<button type="button" class="btn btn-primary"> View</button>} position="left center">
+        <Popup trigger={<button type="button" className="btn btn-primary"> View</button>} position="left center">
             <div>
                 <p>
                 <b>Name:</b> {props.user.name} <br/>
@@ -27,16 +26,10 @@ const Users = props => (
         </Popup>
         </td> 
          <td>
-            <Button variant="primary" onPress={UsersList.viewAction} >Update</Button>
+            <EditUser id={props.user._id}/>
         </td>
         <td>
-        <Popup trigger={<button type="button" class="btn btn-primary"> Delete</button>} position="left center">
-            <div> 
-                <p>Are you sure? </p>
-                <button type="button" class="btn btn-secondary"> No</button>
-                <button type="button" class="btn btn-success" id={props.user._id}> Yes</button>
-                </div>
-          </Popup>      
+          <DeleteUser user={Users} user={props.user} id={props.user._id}/>
         </td> 
         
     </tr>
