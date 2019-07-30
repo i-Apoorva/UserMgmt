@@ -47,9 +47,9 @@ User.findById(req.params.user_id, function (err, user) {
         if (err)
             res.send(err);
 user.name = req.body.name ? req.body.name : user.name;
-        user.gender = req.body.gender;
-        user.email = req.body.email;
-        user.phone = req.body.phone;
+        user.gender = req.body.gender ? req.body.gender : user.gender;
+        user.email = req.body.email ? req.body.email : user.email;
+        user.phone = req.body.phone ? req.body.phone : user.phone;
 // save the user and check for errors
         user.save(function (err,user) {
             if (err)

@@ -31,7 +31,6 @@ const Users = props => (
         <td>
           <DeleteUser user={Users} user={props.user} id={props.user._id}/>
         </td> 
-        
     </tr>
 )
 
