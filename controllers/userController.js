@@ -63,7 +63,7 @@ user.name = req.body.name ? req.body.name : user.name;
 };
 // Handle delete user
 exports.delete = function (req, res) {
-User.remove({
+User.deleteOne({
         _id: req.params.user_id
     }, function (err, user) {
         if (err)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ThemeProvider} from 'react-bootstrap';
+//import { Button, ThemeProvider} from 'react-bootstrap';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Popup from "reactjs-popup";
 import axios from 'axios';
@@ -14,7 +14,7 @@ export default class UsersList extends Component {
         console.log(props);
         this.state = {users: []};
         // this.usersList = this.usersList.bind(this);
-        // this.handleDelete = this.handleDelete.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
 
@@ -30,10 +30,20 @@ export default class UsersList extends Component {
             })
     }
     
-      handleDelete =(id) => {
-     let users = this.state.users.filter(user => user.id !== id);
-         this.setState({users : users});
-    }
+    handleDelete = ( id) => {
+        //e.preventDefault();
+         console.log(id);     
+       axios.delete("http://localhost:8000/api/listusers/"+ id).then(response => {
+           console.log(response.data);
+         });
+        const users = this.state.users.filter(user => { 
+            return user._id !== id
+        });
+        console.log(users);
+       this.setState({
+            users
+          })      
+         }
     
 
     render() {
@@ -52,14 +62,18 @@ export default class UsersList extends Component {
                     
                     <tbody>
                     {this.state.users.map( (user) => (
-                    <tr>
+                    <tr key={user._id}>
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>{user.gender}</td>
         <td>{user.phone}</td>
         <td>
-        <Popup trigger={<button type="button" className="btn btn-primary"> View</button>} position="left center">
+        <Popup trigger={<button type="button" className="btn btn-primary"> View</button>} position="left center" arrow={false}>
+            {close => (
             <div>
+            <a className="close" position="right corner" onClick={close}>
+                &times;
+                 </a>
                 <p>
                 <b>Name:</b> {user.name} <br/>
                 <b>Email:</b> {user.email} 
@@ -67,14 +81,16 @@ export default class UsersList extends Component {
                 <b>Gender:</b> {user.gender} <br/>
                 <b>Phone:</b> {user.phone} <br/>
                 </p>
+                
             </div>
+            )}
         </Popup>
         </td> 
          <td>
             <EditUser id={user._id}/>
         </td>
          <td>
-          <DeleteUser  id={user._id} />
+          <DeleteUser handler={this.handleDelete}  id={user._id} users={this.state.users}/>
         </td>  
     </tr>
                     ))}

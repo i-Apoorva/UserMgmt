@@ -17,14 +17,12 @@ export default class CreateUser extends Component {
 
 AddUser =(e) => {
         e.preventDefault();
-        console.log(e.target.id);
-        var userId= e.target.id;
         console.log(this.state);
         axios.post("http://localhost:8000/api/listusers/" , this.state).then(response => {
             console.log(response.data);
           });
-
     }
+
     render() {
         return (
             <div>
@@ -38,7 +36,7 @@ AddUser =(e) => {
                 <input type="text" id="gender" onChange={this.handleChange}></input><br/>
                 <label htmlFor="name">Phone:</label>
                 <input type="text" id="phone" onChange={this.handleChange}></input><br/>
-                <button type="button" id="add" onClick={this.AddUser} className="btn btn-primary"> Submit</button>
+                <button className="btn btn-primary"> Submit</button>
                 </form>  
             </div>
         )
