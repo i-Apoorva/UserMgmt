@@ -15,7 +15,7 @@ export default class CreateUser extends Component {
         })
     }
 
-    EditUser =(e) => {
+AddUser =(e) => {
         e.preventDefault();
         console.log(e.target.id);
         var userId= e.target.id;
@@ -29,7 +29,7 @@ export default class CreateUser extends Component {
         return (
             <div>
                 <span> <b>Add a new User</b></span>
-                <form onSubmit={this.EditUser}>
+                <form onSubmit={this.AddUser}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" onChange={this.handleChange}></input> <br/>
                 <label htmlFor="name">Email:</label>
@@ -38,7 +38,7 @@ export default class CreateUser extends Component {
                 <input type="text" id="gender" onChange={this.handleChange}></input><br/>
                 <label htmlFor="name">Phone:</label>
                 <input type="text" id="phone" onChange={this.handleChange}></input><br/>
-                <button type="button" id="add" onClick={this.EditUser} className="btn btn-primary"> Submit</button>
+                <button type="button" id="add" onClick={this.AddUser} className="btn btn-primary"> Submit</button>
                 </form>  
             </div>
         )

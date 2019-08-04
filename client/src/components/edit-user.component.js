@@ -26,6 +26,7 @@ export default class EditUser extends Component {
         axios.put("http://localhost:8000/api/listusers/"+ userId , this.state).then(response => {
             console.log(response.data);
           });
+          
 
     }
     render() {
